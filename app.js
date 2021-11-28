@@ -14,6 +14,11 @@ const PORT = process.env.PORT || 5000;  //프로세스 환경에 포트가 지�
 //연결이 되었을때
 io.on("connection",(socket)=>{
     console.log('소켓 연결완료');
+    //서버에서 받아준다.(채팅 아이디, 함수)
+    socket.on("chatting", (data)=>{ //클라이언트에서 보낸내용 data
+        console.log(data)
+        io.emit("chatting", `그래 반가워 ${data}`)  //전체메세지 보낸다. front에서 서버가 보낸 내용을 받을 수 있따.
+    })
 })
 
 server.listen(PORT, ()=> console.log("server is running ")) //app을 server로 바꿈
