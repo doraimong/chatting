@@ -20,8 +20,12 @@ sendButton.addEventListener("click", ()=>{
 //emit으로 메세지 전달(채널 이름역할, 내용)
 socket.emit("chatting", "from front")
 
+//받아서 front로 전송
 socket.on("chatting", (data)=> {
-    console.log(data)
+    //front로 보낼 html 태그 생성
+    const li = document.createElement("li");
+    li.innerText = `${data.name}님이 - ${data.msg}`;
+    chatList.appendChild(li)
 })
 
 console.log(socket)
