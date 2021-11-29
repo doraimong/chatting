@@ -7,18 +7,28 @@ const nickname = document.querySelector("#nickname");
 const chatList = document.querySelector(".chatting-list");
 const chatInput = document.querySelector(".chatting-input");
 const sendButton = document.querySelector(".send-button");
+const displayContainer = document.querySelector(".display-container");
 
-sendButton.addEventListener("click", ()=>{
+/*엔터처리*/
+chatInput.addEventListener("keypress", (event)=> {
+    if(event.keyCode === 13){
+        send();
+    }
+})
+
+function send(){
     //front의 input에서 입력받은 내용
     const param = {
         name: nickname.value,
         msg: chatInput.value
     }
     socket.emit("chatting", param)
-})
+}
+
+sendButton.addEventListener("click", send)
 
 //emit으로 메세지 전달(채널 이름역할, 내용)
-socket.emit("chatting", "from front")
+socket.emit("chatting2", "from front")
 
 //서버에서 받아서 front로 전송
 socket.on("chatting", (data)=> {
@@ -28,6 +38,7 @@ socket.on("chatting", (data)=> {
     const {name, msg, time} = data;
     const item = new LidModel(name, msg, time);
     item.makeLi()
+    displayContainer.scrollTo(0, displayContainer.scrollHeight) /*스크롤 처리*/
 })
 
 function LidModel(name, msg, time){
