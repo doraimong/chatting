@@ -1,0 +1,119 @@
+* {
+    margin:0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;          /*flex로 세덩이 정렬 36분 봐*/
+    flex-direction: column; /*세로정렬*/
+    overflow: hidden;       /*넘치는거 숨기기*/
+}
+
+.user-container {   /*상*/
+    background: #a9bdce;
+    flex: 1;                /*플렉스 높이주기 비율값*/
+    display: flex;          /*내부 요소인 대화면과 input 태그를 정렬*/
+    justify-content: flex-start;    /*왼쪽에서부터 시작하게*/
+    align-items: center;            /*위 아래 정렬*/
+    padding:0.5rem;                 /*위 아래 여백*/
+}
+.user-container label {
+    font-size: 14px;
+    margin-right: 1rem;             /*대화명과 input 태그 사이 간격*/
+}
+.user-container input {
+    border-radius: 3px;             /*휘어지는 느낌 가미*/
+    border: none;                   /*테두리 없애*/
+    height: 100%;
+}
+
+
+.display-container{ /*중*/
+    flex: 12;
+    background: #b2c7d9;
+    overflow-y: scroll;             /*중앙부 실 대화 이루어지는 파트 스크롤*/
+}
+
+
+.input-container {  /*하*/
+    flex:1;
+    display: flex;
+    justify-content: stretch ;
+    align-items: center;
+}
+.input-container span{  
+    display: flex;
+    justify-content: flex-start;       /*시작지점 정렬*/
+    align-items: center;                /*center해도 위아래로 정렬 안된이유는 span이 input container에 붙어서 그럼 그래서 위 input display: flex;justify-content: center; align-items: center; 를 해줌*/
+    padding: 0.3rem;
+    width: 100%;
+}
+.chatting-input {
+    font-size: 12px;
+    height: 100%;
+    flex: 8;
+    border: none;
+}
+.send-button {              /*@@@@@@@@위아래 패딩5프로 씩주면 꽉참 옆에 채팅도 주면 꽉참*/
+    flex: 1;
+    background: #ffeb33;
+    border: none;
+    height: 50%;
+    border-radius: 3px;
+}
+
+.chatting-list li {
+    width: 90%;
+    padding: 0.3rem;
+    display: flex;
+    justify-content: flex-start;        /*좌측부터 시작*/
+    align-items: flex-end;              /*그래 반가워를 밑으로 정렬 44분15초*/
+    margin-top: 0.5rem;                 /*li들간 간격*/
+}
+
+.profile {      /*채팅창에 프로필 */
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+.profile .user {
+    font-size: 10px;
+    margin-bottom: 0.3rem;
+}
+.profile .image {   /*프로필 이미지 */
+    border-radius: 50%;
+    object-fit: cover;  /*이미지 크기 달라도 딱 맞게 들어간다*/
+    width: 50px;
+    height: 50px;
+}
+.message {
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: 12px;
+    margin: 0 5px;
+    flex: 7;
+}
+.time {
+    font-size: 10px;
+    margin: 0 5px;
+}
+
+.sent {
+    flex-direction: row-reverse;    /*앞에 flex를 줫기때문에 사용 가능 -> 역으로 */
+    float: right;                   /*옆에 딱 붙게 한다*/
+}
+
+.sent .message {
+    background: #ffeb33;
+}
+.received .message {
+    background: #fff;
+}
