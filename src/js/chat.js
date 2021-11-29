@@ -20,12 +20,32 @@ sendButton.addEventListener("click", ()=>{
 //emit으로 메세지 전달(채널 이름역할, 내용)
 socket.emit("chatting", "from front")
 
-//받아서 front로 전송
+//서버에서 받아서 front로 전송
 socket.on("chatting", (data)=> {
     //front로 보낼 html 태그 생성
-    const li = document.createElement("li");
-    li.innerText = `${data.name}님이 - ${data.msg}`;
-    chatList.appendChild(li)
+    
+    //서버에서 데이터를 받아서 계속 찍어낸다.
+    const {name, msg, time} = data;
+    const item = new LidModel(name, msg, time);
+    item.makeLi()
 })
 
-console.log(socket)
+function LidModel(name, msg, time){
+    /*초기화 할당 */
+    this.name = name;
+    this.msg = msg;
+    this.time = time;
+
+    this.makeLi = () => {
+        const li = document.createElement("li");
+        li.classList.add(nickname.value === this.name ? "sent" : "received")/*서버에서 받은 이름과 같으면 sent*/
+        const dom = `<span class="profile">
+        <span class="user">${this.name}</span>
+        <img class= "image" src="http://placeimg.com/50/50/any" alt="any">
+        </span>
+        <span class="message">${this.msg}</span>
+        <span class="time">${this.time}</span>`;
+        li.innerHTML = dom;
+        chatList.appendChild(li)
+    }
+}
